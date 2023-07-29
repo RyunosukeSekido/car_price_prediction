@@ -1,0 +1,9 @@
+bin/
+lib/
+licensing/
+man/
+share/
+include/
+conda-meta/
+ssl/
+tmp/
