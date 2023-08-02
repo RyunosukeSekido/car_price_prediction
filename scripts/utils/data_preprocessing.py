@@ -26,7 +26,6 @@ def fill_missing_state(df, area_mapping):
     for index, row in missing_state_rows.iterrows():
         region = row['region']
         state = df[df['region'] == region]['state'].iloc[0]
-        #  regionからstateを出せない場合は、手動でセット
         if pd.isnull(state):
             state = area_mapping[region]
         df.at[index, 'state'] = state
