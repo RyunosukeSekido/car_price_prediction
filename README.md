@@ -12,6 +12,7 @@ Signate主催の中古車価格予測コンペのリポジトリ
 ├── etc
 ├── lib
 ├── scripts
+│   ├── utils
 │   ├── EDA.ipynb
 │   └── 2023xxxx_xxx_xxxx.ipynb
 ├──submit-file
