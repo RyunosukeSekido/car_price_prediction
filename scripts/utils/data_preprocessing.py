@@ -21,14 +21,14 @@ def fix_odometer_column(df):
     return df
 
 # stateカラムの欠損値を埋める
-def fill_missing_state(df):
+def fill_missing_state(df, area_mapping):
     missing_state_rows = df[df['state'].isnull()]
     for index, row in missing_state_rows.iterrows():
         region = row['region']
         state = df[df['region'] == region]['state'].iloc[0]
+        #  regionからstateを出せない場合は、手動でセット
         if pd.isnull(state):
-        # TODO regionに紐づくstateがない場合もあるので、その場合は緯度経度で取得する
-            state = df['state'].mode().iloc[0]
+            state = area_mapping[region]
         df.at[index, 'state'] = state
 
 # manufacturerカラムの整形
@@ -42,6 +42,12 @@ def normalize_manufacturer_column(df):
     # 文字コードの統一
     df['manufacturer'] = df['manufacturer'].str.encode('ascii', 'ignore').str.decode('utf-8') 
 
+# sizeカラムの整形
+def normalize_size_column(df):
+    # ハイフンの統一
+    df['size'] = df['size'].str.replace('ー', '-').str.replace('−', '-')
+    return df
+    
 # conditionカラムのエンコード
 def encode_condition_column(df):
     condition_ranking = {
