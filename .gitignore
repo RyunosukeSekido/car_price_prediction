@@ -7,3 +7,4 @@ include/
 conda-meta/
 ssl/
 tmp/
+old/
