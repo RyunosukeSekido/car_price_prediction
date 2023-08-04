@@ -41,6 +41,19 @@ def normalize_manufacturer_column(df):
     # 文字コードの統一
     df['manufacturer'] = df['manufacturer'].str.encode('ascii', 'ignore').str.decode('utf-8') 
 
+def preprocess_manufacturer(input_df):
+    output_df = input_df.copy()
+    output_df['manufacturer'] = output_df['manufacturer'].str.lower().str.normalize("NFKC")
+    output_df.loc[output_df['manufacturer'].str.startswith('ni'), 'manufacturer'] = 'nissan'
+    output_df.loc[output_df['manufacturer'].str.startswith('toyo'), 'manufacturer'] = 'toyota'
+    output_df.loc[output_df['manufacturer'].str.startswith('lex'), 'manufacturer'] = 'lexus'
+    output_df.loc[output_df['manufacturer'].str.endswith('cura'), 'manufacturer'] = 'acura'
+    output_df.loc[output_df['manufacturer'].str.endswith('ler'), 'manufacturer'] = 'chrysler'
+    output_df.loc[output_df['manufacturer'].str.endswith('ru'), 'manufacturer'] = 'subaru'
+    output_df.loc[output_df['manufacturer'].str.endswith('turn'), 'manufacturer'] = 'saturn'
+    output_df.loc[output_df['manufacturer'].str.endswith('wagen'), 'manufacturer'] = 'volkswagen'
+    return output_df
+
 # sizeカラムの整形
 def normalize_size_column(df):
     # ハイフンの統一
