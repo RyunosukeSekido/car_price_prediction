@@ -79,3 +79,15 @@ scripts/EDA.ipynb
 - priceをlogで出して予測モデルを構築すると精度がかなり上がる
 - 精度：56.2768113
 - 各カラムのデータが不整地が多いので、一通り綺麗にするとさらに精度が上がりそう
+
+### 2023/08/16
+- tensorflowを使用して予測
+- 前処理は以下の通り
+  - odometerの不正値はレコードを削除
+  - manufacturerの値はフォーマットを統一
+  - sizeのハイフンフォーマット統一
+  - fuel,typeの欠損値はotherで埋める
+  - title_status,stateはpriceと相関がなさそうなので特徴量から削除
+  - yearとodometerの値はを標準化
+  - カテゴリ変数をone-hotエンコード
+- 精度：45.7457027
