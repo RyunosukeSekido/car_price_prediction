@@ -34,8 +34,8 @@ def fill_missing_state(df, area_mapping):
 def normalize_manufacturer_column(df):
     # スペースの除去
     df['manufacturer'] = df['manufacturer'].str.replace(' ', '')
-    # 大文字に統一
-    df['manufacturer'] = df['manufacturer'].str.upper()          
+    # 小文字に統一
+    df['manufacturer'] = df['manufacturer'].str.lower()          
     # 半角に統一
     df['manufacturer'] = df['manufacturer'].str.normalize('NFKC')  
     # 文字コードの統一
